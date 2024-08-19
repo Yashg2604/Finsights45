@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finsights Chatbot</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="chatbotstyles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Finsights Chatbot</h2>
+        </div>
+        <div class="messages" id="messages"></div>
+        <div class="input-container">
+            <input type="text" id="userMessage" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <div class="ag-format-container">
+        <div class="ag-courses_box">
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                Introduction to Stock Markets
+              </div>
+      
+              <div class="ag-courses-item_date-box">
+                Start:
+                <span class="ag-courses-item_date">
+                    The Stock Market Index & The Jargon
+                </span>
+              </div>
+            </a>
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                Why Should One Invest?
+              </div>
+      
+              <div class="ag-courses-item_date-box">
+                Start:
+                <span class="ag-courses-item_date">
+                    Where to Invest?
+                </span>
+              </div>
+            </a>
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                Risk and Return Considerations
+              </div>
+      
+              <div class="ag-courses-item_date-box">
+                Start:
+                <span class="ag-courses-item_date">
+                  High Risk,High Return
+                </span>
+              </div>
+            </a>
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                Financial Intermediaries
+              </div>
+      
+              <div class="ag-courses-item_date-box">
+                Start:
+                <span class="ag-courses-item_date">
+                    DEMAT Account
+                </span>
+              </div>
+            </a>
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                Banks
+              </div>
+      
+              <div class="ag-courses-item_date-box">
+                Start:
+                <span class="ag-courses-item_date">
+                    Clearing Corporations
+                </span>
+              </div>
+            </a>
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                Sector-Specific Indices
+              </div>
+            </a>
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg">
+              </div>
+              <div class="ag-courses-item_title">
+                Key Market Jargons Explained
+              </div>
+            </a>
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                What Happens When You Buy a Stock?
+              </div>
+      
+              <div class="ag-courses-item_date-box">
+                
+                <span class="ag-courses-item_date">
+                  
+                </span>
+              </div>
+            </a>
+          </div>
+      
+        </div>
+      </div>
+
+    <!-- JavaScript code for sending messages and connecting to the backend -->
+    <script>
+        async function sendMessage() {
+            const userMessage = document.getElementById('userMessage').value;
+            if (!userMessage) return;
+
+            // Append user message to the chat
+            const messagesDiv = document.getElementById('messages');
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.className = 'message user-message';
+            userMessageDiv.textContent = `You: ${userMessage}`;
+            messagesDiv.appendChild(userMessageDiv);
+
+            // Clear input field
+            document.getElementById('userMessage').value = '';
+
+            try {
+                // Send POST request to Flask backend at /chat endpoint
+                const response = await fetch('http://localhost:5000/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: userMessage })
+                });
+
+                const data = await response.json();
+
+                // Append bot response to chat
+                const botResponseDiv = document.createElement('div');
+                botResponseDiv.className = 'message bot-message';
+                botResponseDiv.textContent = `Bot: ${data.response}`;
+                messagesDiv.appendChild(botResponseDiv);
+
+                // Scroll chat to the bottom
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            } catch (error) {
+                console.error('Error:', error);
+                const errorMessageDiv = document.createElement('div');
+                errorMessageDiv.className = 'message error-message';
+                errorMessageDiv.textContent = "Failed to get response. Try again later.";
+                messagesDiv.appendChild(errorMessageDiv);
+            }
+        }
+    </script>
+</body>
+</html>
