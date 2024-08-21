@@ -1,4 +1,7 @@
 # Finsights45
+NOTE:- YOU HAVE TO RUN SERVER.PY FOR THE CHATBOT TO WORK
+
+
 Overview
 
 Finsights is a comprehensive web application designed to empower users with essential financial knowledge and facilitate in-depth stock research. By combining engaging educational content with cutting-edge AI technology, Finsights aims to demystify the world of finance.
