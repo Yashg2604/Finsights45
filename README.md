@@ -23,12 +23,19 @@ Website Design and Features
 
 User Interface
 Homepage: Overview of the platform, latest insights.
+
 Investment Opportunities: Detailed information on various investment options in Jeju Island.
+
 Insights and Reports: Access to generated financial insights, downloadable reports.
+
 User Dashboard: Personalized insights, saved searches, investment portfolio tracking.
+
 User Experience
+
 Navigation: Intuitive, easy-to-use navigation.
+
 Interactivity: Interactive charts, graphs, and reports.
+
 Responsiveness: Mobile and desktop-friendly design.
 
 Conclusion
